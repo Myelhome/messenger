@@ -15,7 +15,7 @@
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <button class="btn btn-primary" type="submit"><#if isRegisterForm>Register<#else>Sing in</#if></button>
     </form>
-    <#if !isRegisterForm><div><a  href="/registration">Registration</a></div></#if>
+    <#if !isRegisterForm><div><a  href="/registration">Registration</a></div><#else><div><a  href="/login">Authorization</a></div></#if>
 </#macro>
 
 <#macro logout>
