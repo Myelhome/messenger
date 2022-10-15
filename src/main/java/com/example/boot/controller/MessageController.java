@@ -22,7 +22,7 @@ public class MessageController {
     @Autowired
     private MessageRepository messageRepository;
 
-    @Value("${upload.gitpath}")
+    @Value("${upload.path}")
     private String uploadPath;
 
     @PostMapping("/insert")
@@ -33,7 +33,7 @@ public class MessageController {
             @RequestParam("file") MultipartFile file,
             Map<String, Object> model) throws IOException {
 
-        Message message = new Message(text, tag, user);
+        Message message = new Message(text, tag.toLowerCase().replaceFirst("#", ""), user);
 
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);

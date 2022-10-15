@@ -3,6 +3,7 @@ package com.example.boot.controller;
 import com.example.boot.entity.Message;
 import com.example.boot.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,10 +25,12 @@ public class MainController {
     public String godMessage(@RequestParam(required = false) String filter, Model model) {
 
         Iterable<Message> messages;
+        Sort sort = Sort.by(Sort.Direction.ASC, "id");
+
         if (filter != null && !filter.isEmpty()) {
-            messages = messageRepository.findByTag(filter);
+            messages = messageRepository.findByTag(filter.toLowerCase().replaceFirst("#",""), sort);
         } else {
-            messages = messageRepository.findAll();
+            messages = messageRepository.findAll(sort);
         }
 
         model.addAttribute("messages", messages);

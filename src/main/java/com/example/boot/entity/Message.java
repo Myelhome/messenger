@@ -29,6 +29,10 @@ public class Message {
         return author == null ? "" : author.getUsername();
     }
 
+    public long getAuthorId(){
+        return author == null ? -1 : author.getId();
+    }
+
     public Integer getId() {
         return id;
     }

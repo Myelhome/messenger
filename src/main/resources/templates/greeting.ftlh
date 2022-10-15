@@ -1,6 +1,6 @@
 <#import "parts/common.ftlh" as C>
 
 <@C.page>
-<div>Hello, user</div><br>
-<a href="/main">Main page</a>
+<h5>Hello, traveller</h5>
+<p>Check out our new pub!</p>
 </@C.page>
