@@ -44,20 +44,27 @@
         :
     </div>
     <div class="card-columns">
-        <#list messages as message>
-            <div class="card my-3">
-                <#--            <b>${message.id}</b>-->
-                <div>
-                    <#if message.filename??>
-                        <img class="card-img-top" src="/img/${message.filename}">
-                    </#if>
-                </div>
-                <div class="m-2">
-                    <span>${message.text}</span>
-                    <span>#<a href="main?filter=${message.tag}">${message.tag?lower_case}</a></span>
-                </div>
-                <div class="card-footer text-muted">
+        <#list
+        messages as message>
+            <div class="card card-global my-3 border-0" style="max-width: 18rem;">
+                <div class="ml-3">
+                    <img class="img-custom-icon" src="/img/8366fdf4-92ed-43cc-89e4-427001481688.among_us_not.png">
                     <a href="/user/${message.authorId}">${message.authorName}</a>
+                </div>
+                <#if message.filename??>
+                    <div class="card border-0 my-1">
+                        <img class="card-img-top" src="/img/${message.filename}">
+                    </div>
+                </#if>
+                <div>
+                    <div class="ml-3">
+                        <span>${message.text}</span>
+                    </div>
+                    <#if message.tagExist>
+                        <div class="ml-3">
+                            <span>#<a href="main?filter=${message.tag}">${message.tag?lower_case}</a></span>
+                        </div>
+                    </#if>
                 </div>
             </div>
         <#else>

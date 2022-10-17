@@ -29,6 +29,10 @@ public class Message {
         return author == null ? "" : author.getUsername();
     }
 
+    public boolean getTagExist(){
+        return tag.length() != 0;
+    }
+
     public long getAuthorId(){
         return author == null ? -1 : author.getId();
     }

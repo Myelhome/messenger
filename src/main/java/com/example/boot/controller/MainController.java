@@ -25,7 +25,7 @@ public class MainController {
     public String godMessage(@RequestParam(required = false) String filter, Model model) {
 
         Iterable<Message> messages;
-        Sort sort = Sort.by(Sort.Direction.ASC, "id");
+        Sort sort = Sort.by(Sort.Direction.DESC, "id");
 
         if (filter != null && !filter.isEmpty()) {
             messages = messageRepository.findByTag(filter.toLowerCase().replaceFirst("#",""), sort);
