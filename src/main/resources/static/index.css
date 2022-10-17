@@ -1,0 +1,10 @@
+.card-img-top {
+    border-radius: 1em;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+}
+
+.img-custom-icon {
+    width: 2em;
+    border-radius: 50%;
+    object-fit: cover;
+}
