@@ -1,5 +1,6 @@
 package com.example.boot.controller;
 
+import com.example.boot.entity.Credential;
 import com.example.boot.entity.Message;
 import com.example.boot.entity.User;
 import com.example.boot.repository.MessageRepository;
@@ -27,13 +28,13 @@ public class MessageController {
 
     @PostMapping("/insert")
     public String add(
-            @AuthenticationPrincipal User user,
+            @AuthenticationPrincipal Credential credential,
             @RequestParam(required = true) String text,
             @RequestParam String tag,
             @RequestParam("file") MultipartFile file,
             Map<String, Object> model) throws IOException {
 
-        Message message = new Message(text, tag.toLowerCase().replaceFirst("#", ""), user);
+        Message message = new Message(text, tag.toLowerCase().replaceFirst("#", ""), credential.getUser());
 
         if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(uploadPath);

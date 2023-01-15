@@ -2,6 +2,7 @@
 <#import "parts/login.ftlh" as L>
 
 <@C.page>
-${message!""}
-<@L.login "/login" false/>
+    ${message!""}
+    <p class="error-message">${error!""}</p>
+    <@L.login "/login" false/>
 </@C.page>

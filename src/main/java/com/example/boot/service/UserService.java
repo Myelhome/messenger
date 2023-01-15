@@ -15,7 +15,7 @@ import java.util.Collections;
 import java.util.UUID;
 
 @Service
-public class UserService implements UserDetailsService {
+public class UserService{
     @Autowired
     private UserRepository userRepository;
 
@@ -24,11 +24,6 @@ public class UserService implements UserDetailsService {
 
     @Value("${server.endpoint}")
     String endpoint;
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByUsername(username);
-    }
 
     public boolean addUser(User user){
         User userFromDb = userRepository.findByUsername(user.getUsername());
