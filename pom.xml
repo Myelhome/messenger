@@ -18,10 +18,14 @@
         <java.version>1.8</java.version>
         <datasource.url>jdbc:postgresql://localhost:5432/sweater</datasource.url>
         <datasource.username>postgres</datasource.username>
-        <datasource.password>***</datasource.password>
+        <datasource.password></datasource.password>
     </properties>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-validation</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>

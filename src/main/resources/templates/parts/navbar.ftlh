@@ -23,7 +23,7 @@
             </#if>
         </ul>
 
-        <div class="navbar-text mr-3"><a href="/login">${name_}</a></div>
+        <div class="navbar-text mr-3"><a href="/user/profile">${name_}</a></div>
         <#if isRegistered>
             <@L.logout />
         </#if>

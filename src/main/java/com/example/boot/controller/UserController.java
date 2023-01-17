@@ -1,56 +1,63 @@
 package com.example.boot.controller;
 
+import com.example.boot.entity.Credential;
 import com.example.boot.entity.Role;
 import com.example.boot.entity.User;
-import com.example.boot.repository.UserRepository;
+import com.example.boot.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Arrays;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/user")
-@PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
 
     @Autowired
-    private UserRepository userRepository;
+    private UserService userService;
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public String userList(Model model) {
-        model.addAttribute("users", userRepository.findAll());
+        model.addAttribute("users", userService.findAll());
         return "userList";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{user}")
-    public String userEditForm(@PathVariable User user, Model model){
+    public String userEditForm(@PathVariable User user, Model model) {
         model.addAttribute("roles", Role.values());
         model.addAttribute("user", user);
         return "userEdit";
     }
 
+    @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public String userUpdate(@RequestParam("userId") User user,
                              @RequestParam Map<String, String> form,
                              @RequestParam String username,
-                             @RequestParam String password){
-        user.setUsername(username);
-        user.setPassword(password);
-
-        Set<String> roles = Arrays.stream(Role.values()).map(Role::name).collect(Collectors.toSet());
-        Set<Role> newRoles = new HashSet<>();
-        form.keySet().stream().filter(roles::contains).forEach(r -> newRoles.add(Role.valueOf(r)));
-
-        user.setRoles(newRoles);
-
-        userRepository.save(user);
+                             @RequestParam String password) {
+        userService.updateUser(user, username, password, form);
         return "redirect:/user";
+    }
+
+    @GetMapping("profile")
+    public String getProfile(Model model, @AuthenticationPrincipal Credential credential) {
+        model.addAttribute("username", credential.getUser().getUsername());
+        model.addAttribute("email", credential.getUser().getEmail());
+
+        return "profile";
+    }
+
+    @PostMapping("profile")
+    public String updateProfile(@AuthenticationPrincipal Credential credential,
+                                @RequestParam String password,
+                                @RequestParam String email){
+        userService.updateProfile(credential.getUser(), password, email);
+            return "redirect:/user/profile";
     }
 }

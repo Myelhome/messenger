@@ -3,13 +3,25 @@
         <div class="form-group row">
             <label class="col-sm-2 col-form-label"> User name: </label>
             <div class="col-sm-10">
-                <input type="text" name="username" placeholder="username"/>
+                <input class="form-control ${(usernameError??)?string('is-invalid', '')}" type="text"
+                       name="username" value="<#if user??>${user.username}</#if>" placeholder="username"/>
+                <#if usernameError??>
+                    <div class="invalid-feedback">
+                        ${usernameError}
+                    </div>
+                </#if>
             </div>
         </div>
         <div class="form-group row">
             <label class="col-sm-2 col-form-label"> Password: </label>
             <div class="col-sm-10">
-                <input type="password" name="password" placeholder="password"/>
+                <input class="form-control ${(passwordError??)?string('is-invalid', '')}" type="password"
+                       name="password" value="<#if user??>${user.password}</#if>" placeholder="password"/>
+                <#if passwordError??>
+                    <div class="invalid-feedback">
+                        ${passwordError}
+                    </div>
+                </#if>
             </div>
         </div>
         <#if isRegisterForm>

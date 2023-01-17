@@ -4,6 +4,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
 import java.util.Collection;
 import java.util.Set;
 
@@ -13,11 +15,16 @@ public class User{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @NotBlank(message = "username can't be blank")
     private String username;
+    @NotBlank(message = "password can't be blank")
     private String password;
     private boolean active;
+    @NotBlank(message = "password can't be blank")
+    @Email(message = "not a valid email")
     private String email;
     private String activationCode;
+    private String emailNew;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "user_id"))
@@ -103,5 +110,13 @@ public class User{
                 ", activationCode='" + activationCode + '\'' +
                 ", roles=" + roles +
                 '}';
+    }
+
+    public String getEmailNew() {
+        return emailNew;
+    }
+
+    public void setEmailNew(String emailNew) {
+        this.emailNew = emailNew;
     }
 }

@@ -14,13 +14,25 @@
        aria-controls="collapseExample">
         Post new message
     </a>
-    <div class="collapse" id="collapseIdForPost">
+    <div class="collapse <#if message??>show</#if>" id="collapseIdForPost">
         <form class="mt-3" method="post" action="/insert" enctype="multipart/form-data">
             <div class="form-group">
-                <input class="form-control" type="text" name="text" placeholder="Text">
+                <input class="form-control ${(textError??)?string('is-invalid', '')}" type="text"
+                       value="<#if message??>${message.text}</#if>" name="text" placeholder="Text">
+                <#if textError??>
+                    <div class="invalid-feedback">
+                        ${textError}
+                    </div>
+                </#if>
             </div>
             <div class="form-group">
-                <input class="form-control" type="text" name="tag" placeholder="Tag">
+                <input class="form-control ${(tagError??)?string('is-invalid', '')}" type="text"
+                       value="<#if tag??>${message.tag}</#if>" name="tag" placeholder="Tag">
+                <#if tagError??>
+                    <div class="invalid-feedback">
+                        ${tagError}
+                    </div>
+                </#if>
             </div>
             <div class="form-group">
                 <div class="custom-file">
@@ -44,8 +56,7 @@
         :
     </div>
     <div class="card-columns">
-        <#list
-        messages as message>
+        <#list messages as message>
             <div class="card card-global my-3 border-0" style="max-width: 18rem;">
                 <div class="ml-3">
                     <img class="img-custom-icon" src="/img/8366fdf4-92ed-43cc-89e4-427001481688.among_us_not.png">

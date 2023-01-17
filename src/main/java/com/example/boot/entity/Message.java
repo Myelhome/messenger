@@ -1,5 +1,7 @@
 package com.example.boot.entity;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 
 @Entity
@@ -7,7 +9,11 @@ public class Message {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Length(max = 255, message = "Too long (max 255)")
+    @Length(min = 3, message = "Message must be min 3 letters long")
     private String text;
+    @Length(max = 255, message = "Too long (max 255)")
+    @Length(min = 3, message = "Tag must be min 3 letters long")
     private String tag;
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")

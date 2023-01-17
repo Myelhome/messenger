@@ -12,7 +12,7 @@ public class LoginController {
 
     @GetMapping
     public String login(@RequestParam(required = false) String error, Model model){
-        if(error != null) model.addAttribute("error", error + "Wrong username or password");
+//        if(error != null) model.addAttribute("error", error + "Wrong username or password");
         return "login";
     }
 }
