@@ -70,7 +70,7 @@ public class UserService {
 
     public void updateUser(User user, String username, String password, Map<String, String> form) {
         user.setUsername(username);
-        user.setPassword(password);
+        user.setPassword(passwordEncoder.encode(password));
 
         Set<String> roles = Arrays.stream(Role.values()).map(Role::name).collect(Collectors.toSet());
         Set<Role> newRoles = new HashSet<>();

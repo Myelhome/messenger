@@ -182,3 +182,5 @@ $RECYCLE.BIN/
 # Personal Data
 **/application.properties
 **/upload/
+
+pom.xml

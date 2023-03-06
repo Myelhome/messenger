@@ -16,9 +16,9 @@
     <properties>
         <flyway.version>9.10.2</flyway.version>
         <java.version>1.8</java.version>
-        <datasource.url>jdbc:postgresql://localhost:5432/sweater</datasource.url>
-        <datasource.username>postgres</datasource.username>
-        <datasource.password></datasource.password>
+        <datasource.url>_</datasource.url>
+        <datasource.username>_</datasource.username>
+        <datasource.password>_</datasource.password>
     </properties>
 
     <dependencies>
@@ -67,6 +67,28 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-mail</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.session</groupId>
+            <artifactId>spring-session-jdbc</artifactId>
+        </dependency>
+
+        <!-- JAXB -->
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-core</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.sun.xml.bind</groupId>
+            <artifactId>jaxb-impl</artifactId>
+            <version>2.3.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>

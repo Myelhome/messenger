@@ -6,12 +6,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Set;
 
 @Entity
 @Table(name = "usr")
-public class User{
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -20,7 +21,7 @@ public class User{
     @NotBlank(message = "password can't be blank")
     private String password;
     private boolean active;
-    @NotBlank(message = "password can't be blank")
+    @NotBlank(message = "email can't be blank")
     @Email(message = "not a valid email")
     private String email;
     private String activationCode;

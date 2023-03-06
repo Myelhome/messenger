@@ -25,17 +25,33 @@
             </div>
         </div>
         <#if isRegisterForm>
-        <div class="form-group row">
-            <label class="col-sm-2 col-form-label"> Email: </label>
-            <div class="col-sm-10">
-                <input type="email" name="email" placeholder="xxxx@xxxx.xxx"/>
+            <div class="form-group row">
+                <label class="col-sm-2 col-form-label"> Email: </label>
+                <div class="col-sm-10">
+                    <input class="form-control ${(emailError??)?string('is-invalid', '')}" type="email"
+                           name="email" value="<#if user??>${user.email}</#if>" placeholder="xxxx@xxxx.xxx"/>
+                    <#if emailError??>
+                        <div class="invalid-feedback">
+                            ${emailError}
+                        </div>
+                    </#if>
+                </div>
             </div>
-        </div>
+            <div>
+                <div class="g-recaptcha" data-sitekey="6LcO_wkkAAAAAPlu8bInXkx5bW49znKF5K_4Ddio"></div>
+                <#if captchaError??>
+                    <div class="alert alert-danger" role="alert">
+                        ${captchaError}
+                    </div>
+                </#if>
+            </div>
         </#if>
         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
         <button class="btn btn-primary" type="submit"><#if isRegisterForm>Register<#else>Sing in</#if></button>
     </form>
-    <#if !isRegisterForm><div><a  href="/registration">Registration</a></div><#else><div><a  href="/login">Authorization</a></div></#if>
+    <#if !isRegisterForm>
+        <div><a href="/registration">Registration</a></div><#else>
+        <div><a href="/login">Authorization</a></div></#if>
 </#macro>
 
 <#macro logout>

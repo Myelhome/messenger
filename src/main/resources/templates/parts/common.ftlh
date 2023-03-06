@@ -12,6 +12,7 @@
               integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
               crossorigin="anonymous">
         <link rel="stylesheet" href="/static/index.css">
+        <script src="https://www.google.com/recaptcha/api.js"></script>
     </head>
 
     <body>
